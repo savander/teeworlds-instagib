@@ -316,6 +316,33 @@ CCharacter *CPlayer::GetCharacter()
 	return 0;
 }
 
+void CPlayer::ResetMaxKillStreak()
+{
+	m_MaxKillStreak = 0;
+}
+
+void CPlayer::ResetKillStreak()
+{
+	m_CurrentKillStreak = 0;
+}
+
+void CPlayer::AddToKillStreak()
+{
+	m_CurrentKillStreak++;
+	if (m_CurrentKillStreak > m_MaxKillStreak)
+		m_MaxKillStreak = m_CurrentKillStreak;
+}
+
+int CPlayer::GetKillStreak()
+{
+	return m_CurrentKillStreak;
+}
+
+int CPlayer::GetMaxKillStreak()
+{
+	return m_MaxKillStreak;
+}
+
 void CPlayer::KillCharacter(int Weapon)
 {
 	if(m_pCharacter)

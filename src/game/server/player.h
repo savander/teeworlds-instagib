@@ -41,6 +41,12 @@ public:
 
 	void KillCharacter(int Weapon = WEAPON_GAME);
 	CCharacter *GetCharacter();
+	
+	void ResetMaxKillStreak();
+	void ResetKillStreak();
+	void AddToKillStreak();
+	int GetKillStreak();
+	int GetMaxKillStreak();
 
 	//---------------------------------------------------------
 	// this is used for snapping so we know how we can clip the view for the player
@@ -125,6 +131,10 @@ private:
 	int m_Team;
 	bool m_Dummy;
 
+	// used for killstreaks
+	int m_MaxKillStreak;
+	int m_CurrentKillStreak;
+	
 	// used for spectator mode
 	int m_SpecMode;
 	int m_SpectatorID;

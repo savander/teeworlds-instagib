@@ -433,7 +433,10 @@ void IGameController::DoWincheckMatch()
 			(m_GameInfo.m_TimeLimit > 0 && (Server()->Tick()-m_GameStartTick) >= m_GameInfo.m_TimeLimit*Server()->TickSpeed()*60))
 		{
 			if(m_aTeamscore[TEAM_RED] != m_aTeamscore[TEAM_BLUE] || m_GameFlags&GAMEFLAG_SURVIVAL)
+			{
 				EndMatch();
+				OnMatchEnd();
+			}
 			else
 				m_SuddenDeath = 1;
 		}
@@ -461,8 +464,11 @@ void IGameController::DoWincheckMatch()
 		if((m_GameInfo.m_ScoreLimit > 0 && Topscore >= m_GameInfo.m_ScoreLimit) ||
 			(m_GameInfo.m_TimeLimit > 0 && (Server()->Tick()-m_GameStartTick) >= m_GameInfo.m_TimeLimit*Server()->TickSpeed()*60))
 		{
-			if(TopscoreCount == 1)
+			if(TopscoreCount == 1) 
+			{
 				EndMatch();
+				OnMatchEnd();
+			}
 			else
 				m_SuddenDeath = 1;
 		}
@@ -894,6 +900,7 @@ void IGameController::ChangeMap(const char *pToMap)
 	if(m_GameState == IGS_WARMUP_GAME || m_GameState == IGS_WARMUP_USER)
 		SetGameState(IGS_GAME_RUNNING);
 	EndMatch();
+	OnMatchEnd();
 	
 	if(m_GameState != IGS_END_MATCH)
 	{
