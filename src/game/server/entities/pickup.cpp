@@ -1,8 +1,10 @@
 /* (c) Magnus Auvinen. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at teeworlds.com.                */
 #include <generated/server_data.h>
+#include <engine/shared/config.h>
 #include <game/server/gamecontext.h>
 #include <game/server/player.h>
+#include <game/server/gamemodes/idm.h>
 
 #include "character.h"
 #include "pickup.h"
@@ -14,7 +16,8 @@ CPickup::CPickup(CGameWorld *pGameWorld, int Type, vec2 Pos)
 
 	Reset();
 
-	GameWorld()->InsertEntity(this);
+	if (!str_comp_nocase(g_Config.m_SvGametype, CGameControllerIDM::GAMETYPE_NAME) == 0)
+		GameWorld()->InsertEntity(this);
 }
 
 void CPickup::Reset()
