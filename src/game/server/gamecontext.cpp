@@ -14,6 +14,7 @@
 #include "entities/character.h"
 #include "gamemodes/ctf.h"
 #include "gamemodes/dm.h"
+#include "gamemodes/idm.h"
 #include "gamemodes/lms.h"
 #include "gamemodes/lts.h"
 #include "gamemodes/mod.h"
@@ -1430,7 +1431,9 @@ void CGameContext::OnInit()
 
 	// select gametype
 	if(str_comp_nocase(g_Config.m_SvGametype, "mod") == 0)
-		m_pController = new CGameControllerMOD(this);
+		m_pController = new CGameControllerMOD(this);	
+	if(str_comp_nocase(g_Config.m_SvGametype, "idm") == 0)
+		m_pController = new CGameControllerIDM(this);
 	else if(str_comp_nocase(g_Config.m_SvGametype, "ctf") == 0)
 		m_pController = new CGameControllerCTF(this);
 	else if(str_comp_nocase(g_Config.m_SvGametype, "lms") == 0)
